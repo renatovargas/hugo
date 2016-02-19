@@ -544,7 +544,7 @@ func (s *Site) ReBuild(events []fsnotify.Event) error {
 		// once readResults is finished it will close coordinator and move along
 		<-coordinator
 		// allow that routine to finish, then close page & fileconvchan as we've sent
-		// everthing to them we need to.
+		// everything to them we need to.
 		close(pageChan)
 		close(fileConvChan)
 
@@ -552,8 +552,6 @@ func (s *Site) ReBuild(events []fsnotify.Event) error {
 		close(convertResults)
 
 		s.timerStep("read & convert pages from source")
-
-		fmt.Errorf("%s", errs)
 
 		s.setupPrevNext()
 		if err = s.BuildSiteMeta(); err != nil {
@@ -582,8 +580,6 @@ func (s *Site) ReBuild(events []fsnotify.Event) error {
 	} else {
 		return err
 	}
-
-	return nil
 }
 
 func (s *Site) Analyze() error {
